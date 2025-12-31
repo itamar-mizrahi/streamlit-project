@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: streamlit-container
-        image: user123/streamlit-app:v1
+        image: my-streamlit-app:v1
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
