@@ -1,1 +1,4 @@
 git clone https://github.com/yosefanaliza/streamlit_minikube_app
+git clone https://github.com/yosefanaliza/streamlit_minikube_app temp_app && cp -r temp_app/* . && rm -rf temp_app
+docker build -t my-streamlit-app:v1 .
+./bin/minikube start --driver=docker
