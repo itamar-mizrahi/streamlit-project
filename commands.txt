@@ -1,4 +1,27 @@
-git clone https://github.com/yosefanaliza/streamlit_minikube_app
+# Step 1: Setup
 git clone https://github.com/yosefanaliza/streamlit_minikube_app temp_app && cp -r temp_app/* . && rm -rf temp_app
+minikube start --driver=docker
+minikube status
+
+# Step 2: Docker
 docker build -t my-streamlit-app:v1 .
-./bin/minikube start --driver=docker
+docker run -d -p 8080:8080 my-streamlit-app:v1
+docker ps
+# (Simulated push to Docker Hub)
+docker tag my-streamlit-app:v1 user123/streamlit-app:v1
+docker push user123/streamlit-app:v1
+
+# Step 3: Kubernetes Deployment
+kubectl apply -f pod.yaml
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+
+# Step 4: Verify
+kubectl get all
+kubectl get pods
+kubectl get services
+minikube service streamlit-service --url
+
+# Step 5: Debugging/Logs
+kubectl logs deployment/streamlit-deployment
+kubectl describe pod -l app=streamlit-app
